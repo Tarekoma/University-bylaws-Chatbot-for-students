@@ -13,7 +13,7 @@
 
 **CERA** is an AI-powered assistant designed to help students navigate university regulations efficiently. Built on a **Retrieval-Augmented Generation (RAG)** system, it solves the problem of students struggling to find accurate answers in large, complex academic policy documents — by retrieving and presenting precise information on demand. A second approach via **LLM Automation on Telegram** makes the system practically accessible for everyday student use.
 
-🎬 Video Demo : __[Watch Demo Here](https://1drv.ms/v/c/47438efdb3ee2559/IQDhzmlYoC2cR5d_NL7iZ8PUAVkdVgNEk7dEV5FYvVPJr3U?e=o2SKoE)__
+🎬 Video Demo : _[Watch Video Here](https://1drv.ms/v/c/47438efdb3ee2559/IQDhzmlYoC2cR5d_NL7iZ8PUAVkdVgNEk7dEV5FYvVPJr3U?e=o2SKoE)__
 
 ---
 
