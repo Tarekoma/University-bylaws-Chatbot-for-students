@@ -1,77 +1,146 @@
-# Engineering Regulations Chatbot (RAG)
+<div align="center">
 
-A small chatbot that answers students' questions using your **Undergraduate Regulations of the College of Engineering** PDF.
+# 🎓 CERA — Computer Engineering Regulations Assistant
+### An AI-Powered Chatbot for University Bylaws Navigation
 
-## What this project does
-- Extracts and cleans Arabic text from the PDF (incl. converting Arabic presentation forms to normal letters via Unicode NFKC)
-- Splits content by **articles (مادة)** + safe chunking
-- Builds a local **Chroma** vector database using **Sentence-Transformers (E5 multilingual)**
-- Provides a **Streamlit** chat UI
-- Optional: tries vector **table extraction** (Camelot / Tabula) and falls back to **OCR** *only for pages that need it*
+**Transforming complex university regulations into accessible, accurate, and instant guidance — empowering students, not overwhelming them.**
+
+</div>
 
 ---
 
-## 1) Setup (PyCharm / Windows 11)
+## 📖 Overview
 
-### Create venv
-```bash
-python -m venv .venv
-.venv\Scripts\activate
-```
+**CERA** is an AI-powered assistant designed to help students navigate university regulations efficiently. Built on a **Retrieval-Augmented Generation (RAG)** system, it solves the problem of students struggling to find accurate answers in large, complex academic policy documents — by retrieving and presenting precise information on demand. A second approach via **LLM Automation on Telegram** makes the system practically accessible for everyday student use.
 
-### Install dependencies
-```bash
-pip install -r requirements.txt
-```
-
-### Put your PDF
-Copy your regulations PDF into this folder and name it:
-`bylaws.pdf`
-
-(or change `PDF_PATH` in `.env`)
-
-### Add your API key (Groq recommended)
-Copy `.env.example` to `.env` and fill:
-- `GROQ_API_KEY=...`
+🎬 Video Demo : __[Watch Demo Here](https://1drv.ms/v/c/47438efdb3ee2559/IQDhzmlYoC2cR5d_NL7iZ8PUAVkdVgNEk7dEV5FYvVPJr3U?e=o2SKoE)__
 
 ---
 
-## 2) Build the index
-```bash
-python build_index.py
-```
+## 🔍 Problems We Solve
 
-It will create a local vector DB in `./chroma_db`.
-
----
-
-## 3) Run the chatbot
-```bash
-streamlit run app.py
-```
+| # | Problem |
+|---|---------|
+| 1 | University bylaws are long, complex documents written in formal legal language |
+| 2 | Students struggle to find specific answers through manual searching |
+| 3 | No interactive or intelligent way to query official university regulations |
+| 4 | Arabic legal text with mixed formatting makes automated processing challenging |
+| 5 | Tables, embedded content, and unstructured PDFs hinder accurate retrieval |
 
 ---
 
-## Optional (only if you need it)
-### Camelot (vector tables)
-Camelot may require Ghostscript on Windows if you use lattice mode. If you don't have tables, you can ignore it.
+## ✨ Core Features
 
-### Tabula (vector tables)
-Tabula needs Java installed.
+### 🤖 AI Capabilities
 
-### OCR fallback
-OCR needs Tesseract installed + Arabic language pack.
-If your PDF is already text-based, OCR is not needed.
+| Feature | Description |
+|---|---|
+| 🧠 **RAG-Based Retrieval** | Extracts, chunks, and semantically searches bylaws to return grounded, traceable answers |
+| 💬 **Natural Language Q&A** | Students ask questions in plain Arabic or English and receive instant, accurate responses |
+| 📎 **Source Referencing** | Answers are tied to specific articles and pages in official documents |
+| 🔎 **Semantic Search** | Uses vector embeddings and ChromaDB to find the most relevant regulation chunks |
+| 🤖 **Telegram Automation** | LLM-powered chatbot via n8n workflows for high-usability student access |
+
+### 🏫 System Capabilities
+
+- 📄 Processes official Arabic university regulation PDFs automatically
+- 🧹 Cleans and chunks legal text by articles and size for accurate retrieval
+- 🗄️ Stores embeddings in **ChromaDB** vector database for fast semantic lookup
+- 🌐 Supports **Arabic and English** mixed content natively
+- ⚡ Provides instant responses — no waiting for office hours or admin replies
+- 🔧 Scalable and customizable across faculties, universities, or policy documents
 
 ---
 
-## Troubleshooting
-- If the chatbot answers poorly: increase `TOP_K` to 6–10, or reduce `CHUNK_CHARS`.
-- If Arabic text looks broken: this project normalizes using Unicode NFKC (works well for many PDFs).
+## ⚙️ Dual Approach Architecture
 
+| Approach | Focus | Key Advantage |
+|---|---|---|
+| 🔬 **RAG-Based Chatbot** | Academic rigor · Explainability · Traceability | Answers grounded strictly in official documents |
+| 📡 **LLM via Telegram (n8n)** | Practical usability · Reliability · Student experience | Familiar interface with instant automated responses |
 
-## If you see: 'LLM not available'
-Install Groq client:
-```bash
-pip install groq
+> 🧩 Both systems address the same problem but follow different technical strategies — independently deployable and complementary.
+
+---
+
+## 🗂️ RAG System Architecture
+
+### 🔄 Offline Phase — Document Indexing
 ```
+PDF Regulations → Text Extraction → Text Cleaning
+→ Chunking (by articles & size) → Embedding Generation → Vector Database (ChromaDB)
+```
+
+### 🌐 Online Phase — Query & Answer
+```
+User Question → Query Embedding → Vector Search (Top-K Chunks)
+→ LLM Answer Generation → Final Answer to User
+```
+
+> 💡 If the LLM is unavailable, the system falls back to retrieved text snippets or rule-based extraction.
+
+---
+
+## 🚀 Implementation Plan
+
+1. **Data Collection** — Gathered official university bylaws in PDF format
+2. **Preprocessing** — Extracted, cleaned, and chunked Arabic legal text by articles
+3. **Embedding & Indexing** — Generated semantic embeddings and stored them in ChromaDB
+4. **RAG Pipeline** — Built retrieval + LLM generation pipeline for traceable Q&A
+5. **Telegram Integration** — Deployed LLM automation via n8n workflows on Telegram
+6. **Testing & Evaluation** — Validated answer accuracy, source referencing, and Arabic support
+
+---
+
+## 🎯 Objectives
+
+- ✅ Answer students' questions using natural language in Arabic and English
+- ✅ Ensure all answers are grounded in official university documents only
+- ✅ Provide article-level and page-level source references for every answer
+- ✅ Reduce confusion, manual searching, and repetitive administrative inquiries
+- ✅ Deliver a scalable foundation for future multi-faculty or multi-university deployment
+
+---
+
+## 🏆 Benefits
+
+| Benefit | Description |
+|---|---|
+| ⏱️ **Time Efficiency** | Eliminates hours of manual PDF searching for students and staff |
+| 🕐 **24/7 Availability** | Students get immediate answers anytime without waiting for office hours |
+| 📈 **Scalable & Customizable** | Easily adapted for different faculties, universities, or policy documents |
+
+---
+
+## 📁 Project Structure
+
+| File | Owner | Description |
+|---|---|---|
+| `app.py` | Sandy | Main application entry point |
+| `build_index.py` | Sandy | Builds the ChromaDB vector index |
+| `bylaws.pdf` | Sandy | Official university regulations source |
+| `chunking.py` | Hossam | Text chunking by articles and size |
+| `config.py` | Mary | Configuration and environment settings |
+| `pdf_extract.py` | Mary | PDF text extraction module |
+| `embeddings_store.py` | Tarek | Embedding generation and storage |
+| `llm_client.py` | Tarek | LLM API integration (Gemini) |
+| `retriever.py` | Ibrahim | Semantic search and retrieval logic |
+| `text_cleaning.py` | Ibrahim | Arabic text cleaning and normalization |
+
+---
+
+## 👥 Team
+
+| Name | Role |
+|---|---|
+| Tarek Omar Mahmoud | Embeddings & LLM Integration |
+| Ahmed Hossam Hussin | Text Chunking |
+| Mohamed Ibrahim Mohamed | Retrieval & Text Cleaning |
+| Sandy Alaa Ayiad | App & Index Builder |
+| Mary Noshy Ayiad | PDF Extraction & Config |
+
+---
+
+<div align="center">
+  Made with ❤️ by <strong>CERA Team</strong> · AI for Smarter Student Experience 🎓
+</div>
